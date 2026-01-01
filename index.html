@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last Pass - Coming Soon</title>
+    <style>
+        :root {
+            --primary-orange: #FF9600;
+            --text-dark: #333333;
+            --text-muted: #888888;
+            --bg-color: #fcfcfc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            animation: fadeIn 1.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .app-icon {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 20px;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            letter-spacing: -1px;
+            font-weight: 700;
+        }
+
+        .coming-soon {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 4px; /* Gives it an elegant, spaced-out look */
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .app-icon { width: 140px; height: 140px; }
+            .coming-soon { font-size: 0.9rem; letter-spacing: 3px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="last-fast-icon-light.png" alt="Last Pass App Icon" class="app-icon">
+        
+        <h1>Last Pass</h1>
+
+        <p class="coming-soon">Coming Soon</p>
+    </div>
+
+</body>
+</html>
