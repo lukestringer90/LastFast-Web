@@ -1,82 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Last Fast - Coming Soon</title>
+    <title>LastFast - Intelligent Fasting Tracker</title>
     <style>
         :root {
-            --primary-orange: #FF9600;
-            --text-dark: #333333;
-            --text-muted: #888888;
-            --bg-color: #fcfcfc;
+            /* Branding Colours derived from Icon */
+            --primary-orange: #FF9600; 
+            --testflight-blue: #2CA1F4;
+            
+            /* Light Mode Defaults */
+            --text-dark: #1c1c1e;
+            --text-body: #3a3a3c;
+            --text-muted: #8e8e93;
+            --bg-color: #f2f2f7;
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.12);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark Mode - Adapted to match the dark icon's dark grey aesthetic */
+                --text-dark: #ffffff;
+                --text-body: #d1d1d6;
+                --bg-color: #000000;
+                --card-bg: #1c1c1e; 
+                --shadow-color: rgba(0, 0, 0, 0.4);
+            }
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
             color: var(--text-dark);
+            margin: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .container {
-            max-width: 600px;
-            padding: 40px;
-            animation: fadeIn 1.2s ease-out;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .main-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .icon-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 24px auto;
+            border-radius: 38px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            overflow: hidden; /* Ensures the image respects the border radius */
         }
 
         .app-icon {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 20px;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            letter-spacing: -1px;
+            font-size: 3rem;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
             font-weight: 700;
         }
 
-        .coming-soon {
-            font-size: 1.1rem;
+        .tagline {
+            font-size: 1.3rem;
             color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 4px; /* Gives it an elegant, spaced-out look */
-            margin-top: 15px;
             font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto 10px auto;
+        }
+
+        /* Introduction Text */
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-body);
+            font-size: 1.1rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-orange);
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-body);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            border-top: 1px solid var(--text-muted);
+            padding-top: 40px;
+            margin-top: 60px;
+            opacity: 0.8;
+            color: var(--text-muted);
+        }
+        
+        .download-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--testflight-blue);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: opacity 0.2s, transform 0.1s ease;
+            box-shadow: 0 4px 14px rgba(44, 161, 244, 0.4);
+        }
+
+        .download-badge:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        
+        .download-badge svg {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .beta-notice {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Divider Style */
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background-color: var(--text-muted);
+            opacity: 0.2;
+            margin: 40px auto;
+            max-width: 150px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .app-icon { width: 140px; height: 140px; }
-            .coming-soon { font-size: 0.9rem; letter-spacing: 3px; }
+            h1 { font-size: 2.2rem; }
+            .icon-container { width: 120px; height: 120px; }
+            .main-wrapper { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="last-fast-icon-light.png" alt="Last Fast App Icon" class="app-icon">
-        
-        <h1>Last Fast</h1>
+    <div class="main-wrapper">
+        <header class="hero">
+            <div class="icon-container">
+                <!-- Using <picture> to automatically switch based on system theme -->
+                <picture>
+                    <source srcset="last-fast-icon-dark.png" media="(prefers-color-scheme: dark)">
+                    <img src="last-fast-icon-light.png" alt="LastFast App Icon" class="app-icon" onerror="this.style.display='none'; this.parentElement.parentElement.style.background='linear-gradient(135deg, #FF9600, #FF5E00)'">
+                </picture>
+            </div>
+            
+            <h1>LastFast</h1>
+            <p class="tagline">Your personal intermittent fasting companion.</p>
+            
+            <a href="https://testflight.apple.com/join/DsaTfQwF" class="download-badge">
+                <!-- Simple SVG Propeller icon representing TestFlight/Beta -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                Join the Beta on TestFlight
+            </a>
+            
+            <span class="beta-notice">Limited spots available. Requires TestFlight on iOS.</span>
 
-        <p class="coming-soon">Coming Soon</p>
+            <hr class="section-divider">
+        </header>
+
+        <section class="intro">
+            <p>Tracking your fasts should be as effortless as your daily routine. From initiating a fast to reviewing your progress, LastFast keeps you informed and motivated every step of the way, ensuring your journey is always synchronised and personalised.</p>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <h3>Seamless Fasting Control</h3>
+                <p>Take complete control with a precise timer that works even in the background. Set goal durations or specific end times, and stay on schedule with timely notifications that keep you informed without interruption.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Progress & Management</h3>
+                <p>View your history through insightful graphs and chronological lists. Effortlessly manage your records by editing start times, end times, or goals, giving you full control over your data history.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Glanceable Insights</h3>
+                <p>Monitor your progress instantly with sleek widgets and Live Activities on your Lock Screen. The interface supports both Dark and Light Modes, complementing your device's aesthetic perfectly.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Integration & Automation</h3>
+                <p>Your data stays perfectly in sync across all Apple devices via iCloud. Enhance efficiency with Siri and Shortcuts support to build personalised workflows for your schedule.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <small>Made by Luke Stringer, 2026</small>
+        </footer>
     </div>
 
 </body>
