@@ -6,11 +6,8 @@
     <title>LastFast - Intelligent Fasting Tracker</title>
     <style>
         :root {
-            /* Branding Colours derived from Icon */
-            --primary-orange: #FF9600; 
-            --testflight-blue: #2CA1F4;
-            
-            /* Light Mode Defaults */
+            --primary-orange: #FF9600;
+            --app-store-blue: #0071e3;
             --text-dark: #1c1c1e;
             --text-body: #3a3a3c;
             --text-muted: #8e8e93;
@@ -21,13 +18,16 @@
 
         @media (prefers-color-scheme: dark) {
             :root {
-                /* Dark Mode - Adapted to match the dark icon's dark grey aesthetic */
                 --text-dark: #ffffff;
                 --text-body: #d1d1d6;
                 --bg-color: #000000;
-                --card-bg: #1c1c1e; 
+                --card-bg: #1c1c1e;
                 --shadow-color: rgba(0, 0, 0, 0.4);
             }
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -37,29 +37,70 @@
             margin: 0;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
         }
 
-        .main-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
+        /* Main Layout */
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
             animation: fadeIn 0.8s ease-out;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 40px;
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* Video Side */
+        .video-side {
+            flex: 0 0 auto;
+        }
+
+        .video-container {
+            width: 280px;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px var(--shadow-color);
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Info Side */
+        .info-side {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .icon-container {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 24px auto;
-            border-radius: 38px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            overflow: hidden; /* Ensures the image respects the border radius */
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px var(--shadow-color);
+            overflow: hidden;
+            flex-shrink: 0;
         }
 
         .app-icon {
@@ -70,114 +111,103 @@
         }
 
         h1 {
-            font-size: 3rem;
-            margin: 0 0 10px 0;
+            font-size: 2.4rem;
+            margin: 0;
             letter-spacing: -0.5px;
             font-weight: 700;
         }
 
         .tagline {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--text-muted);
             font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto 10px auto;
+            margin: 0 0 20px 0;
         }
 
-        /* Introduction Text */
-        .intro {
-            text-align: center;
-            margin-bottom: 50px;
+        .description {
             color: var(--text-body);
             font-size: 1.1rem;
+            margin: 0 0 32px 0;
         }
 
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            transition: transform 0.2s ease, background-color 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .feature-card h3 {
-            color: var(--primary-orange);
-            font-size: 1.2rem;
-            margin-top: 0;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .feature-card p {
-            color: var(--text-body);
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            border-top: 1px solid var(--text-muted);
-            padding-top: 40px;
-            margin-top: 60px;
-            opacity: 0.8;
-            color: var(--text-muted);
-        }
-        
         .download-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--testflight-blue);
+            background-color: var(--app-store-blue);
             color: #ffffff;
-            padding: 12px 24px;
+            padding: 16px 32px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            margin-top: 20px;
+            font-size: 1.1rem;
             transition: opacity 0.2s, transform 0.1s ease;
-            box-shadow: 0 4px 14px rgba(44, 161, 244, 0.4);
+            box-shadow: 0 4px 14px rgba(0, 113, 227, 0.4);
         }
 
         .download-badge:hover {
             opacity: 0.9;
             transform: translateY(-1px);
         }
-        
+
         .download-badge svg {
-            margin-right: 8px;
-            width: 20px;
-            height: 20px;
+            margin-right: 10px;
+            width: 22px;
+            height: 22px;
             fill: currentColor;
         }
 
-        .beta-notice {
+        .availability-note {
             display: block;
-            margin-top: 12px;
-            font-size: 0.9rem;
+            margin-top: 14px;
+            font-size: 0.95rem;
             color: var(--text-muted);
         }
 
-        /* Divider Style */
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background-color: var(--text-muted);
-            opacity: 0.2;
-            margin: 40px auto;
-            max-width: 150px;
+        /* Features List */
+        .features-list {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background-color: var(--card-bg);
+            color: var(--text-body);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer > div a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        .footer small a {
+            color: var(--primary-orange);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer small {
+            display: block;
+            margin-top: 12px;
+            opacity: 0.7;
         }
 
         @keyframes fadeIn {
@@ -185,69 +215,99 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .icon-container { width: 120px; height: 120px; }
-            .main-wrapper { padding: 40px 20px; }
+        /* Mobile Layout */
+        @media (max-width: 800px) {
+            .hero-section {
+                padding: 40px 24px;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .video-container {
+                width: 240px;
+            }
+
+            .info-side {
+                max-width: 100%;
+            }
+
+            .brand-header {
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.25rem;
+            }
+
+            .features-list {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper">
-        <header class="hero">
-            <div class="icon-container">
-                <!-- Using <picture> to automatically switch based on system theme -->
-                <picture>
-                    <source srcset="last-fast-icon-dark.png" media="(prefers-color-scheme: dark)">
-                    <img src="last-fast-icon-light.png" alt="LastFast App Icon" class="app-icon" onerror="this.style.display='none'; this.parentElement.parentElement.style.background='linear-gradient(135deg, #FF9600, #FF5E00)'">
-                </picture>
+    <div class="page-wrapper">
+        <main class="hero-section">
+            <div class="hero-content">
+                <div class="video-side">
+                    <div class="video-container">
+                        <video autoplay loop muted playsinline>
+                            <source src="last-fast-preview.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="info-side">
+                    <div class="brand-header">
+                        <div class="icon-container">
+                            <picture>
+                                <source srcset="last-fast-icon-dark.png" media="(prefers-color-scheme: dark)">
+                                <img src="last-fast-icon-light.png" alt="LastFast App Icon" class="app-icon">
+                            </picture>
+                        </div>
+                        <h1>LastFast</h1>
+                    </div>
+
+                    <p class="tagline">Effortless fasting. Beautiful simplicity.</p>
+
+                    <p class="description">A focused fasting timer designed to make tracking effortless. No complicated meal plans or calorie counting. Just a beautiful timer that helps you start, track, and complete your fasts with confidence.</p>
+
+                    <a href="https://apps.apple.com/app/lastfast/id0000000000" class="download-badge">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                        Download on the App Store
+                    </a>
+                    <span class="availability-note">Free download. No subscriptions.</span>
+
+                    <div class="features-list">
+                        <span class="feature-tag">Flexible Goals</span>
+                        <span class="feature-tag">Smart Notifications</span>
+                        <span class="feature-tag">Fasting Stats</span>
+                        <span class="feature-tag">Home Screen Widgets</span>
+                        <span class="feature-tag">Lock Screen Widgets</span>
+                        <span class="feature-tag">iCloud Sync</span>
+                        <span class="feature-tag">Siri Shortcuts</span>
+                        <span class="feature-tag">Dark Mode</span>
+                    </div>
+                </div>
             </div>
-            
-            <h1>LastFast</h1>
-            <p class="tagline">Your personal intermittent fasting companion.</p>
-            
-            <a href="https://testflight.apple.com/join/DsaTfQwF" class="download-badge">
-                <!-- Simple SVG Propeller icon representing TestFlight/Beta -->
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                </svg>
-                Join the Beta on TestFlight
-            </a>
-            
-            <span class="beta-notice">Limited spots available. Requires TestFlight on iOS.</span>
-
-            <hr class="section-divider">
-        </header>
-
-        <section class="intro">
-            <p>Tracking your fasts should be as effortless as your daily routine. From initiating a fast to reviewing your progress, LastFast keeps you informed and motivated every step of the way, ensuring your journey is always synchronised and personalised.</p>
-        </section>
-
-        <section class="features-grid">
-            <div class="feature-card">
-                <h3>Seamless Fasting Control</h3>
-                <p>Take complete control with a precise timer that works even in the background. Set goal durations or specific end times, and stay on schedule with timely notifications that keep you informed without interruption.</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>Progress & Management</h3>
-                <p>View your history through insightful graphs and chronological lists. Effortlessly manage your records by editing start times, end times, or goals, giving you full control over your data history.</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>Glanceable Insights</h3>
-                <p>Monitor your progress instantly with sleek widgets and Live Activities on your Lock Screen. The interface supports both Dark and Light Modes, complementing your device's aesthetic perfectly.</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>Integration & Automation</h3>
-                <p>Your data stays perfectly in sync across all Apple devices via iCloud. Enhance efficiency with Siri and Shortcuts support to build personalised workflows for your schedule.</p>
-            </div>
-        </section>
+        </main>
 
         <footer class="footer">
-            <small>Made by Luke Stringer, 2026</small>
+            <div>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <small>Made by <a href="http://stringer.dev">Luke Stringer</a>, 2026</small>
         </footer>
     </div>
 
